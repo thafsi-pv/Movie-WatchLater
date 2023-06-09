@@ -1,15 +1,35 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import MovieList from "./pages/MovieList";
+import WatchLater from "./pages/WatchLater";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <MovieList />,
+      children:[{
+        path:"/watchlater",
+        element:<WatchLater/>
+      }]
+    },
+    {
+      path: "/signin",
+      element: <SignIn />,
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
+    },
+  ]);
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Movie watch later</h1>
-    </>
+    <div className="h-screen">
+      <RouterProvider router={appRouter} />
+    </div>
   );
 }
 
