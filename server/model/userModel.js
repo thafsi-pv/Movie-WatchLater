@@ -7,9 +7,9 @@ const userSchema = mongoose.Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     //movies: [{ type: mongoose.Schema.Types.ObjectId, ref: "movies" }],
-    moviez: [{ type: mongoose.Schema.Types.ObjectId, ref: "movies" }],
+    movies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movies' }],
   },
   { timestamps: true, strict: false }
 );
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("Users", userSchema);

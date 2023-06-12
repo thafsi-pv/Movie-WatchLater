@@ -47,12 +47,6 @@ function SignUp() {
               </div>
               <Input id="password" name="password" type="password" />
             </div>
-            <div>
-              <div className="flex items-center justify-between">
-                <Label htmlFor="verifyPassword" labelText="Verify password" />
-              </div>
-              <Input id="verifyPassword" name="verifyPassword" type="text" />
-            </div>
 
             <div>
               <Button type="submit" btnLable="Sign Up" onClick={""} />

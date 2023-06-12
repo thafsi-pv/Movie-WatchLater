@@ -44,19 +44,25 @@ const signup = async (req, res) => {
   }
 };
 
-const watchlater = async (req, res) => {
+const watchlater1 = async (req, res) => {
   try {
     console.log(
       "🚀 ~ file: userController.js:50 ~ watchlater ~ req.userId:",
       req.userId
     );
-    const watchList = await userModel
-      .findOne({ _id: req.userId })
-      .populate('moviez')
+    var watchList = await userModel
+      .find({ _id: req.userId })
+      .select("movies")
+      .populate("movies");
+    //await watchList.populate({ path: "movies", model: "movies" });
+    console.log(
+      "🚀 ~ file: userController.js:55 ~ watchlater ~ watchList:",
+      watchList
+    );
 
     res.json(watchList);
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -69,7 +75,7 @@ const addtoWathclater = async (req, res) => {
   const newList = await userModel.findByIdAndUpdate(
     userId,
     {
-      $addToSet: { moviez: req.body.movieid },
+      $push: { movies: req.body.movieid },
     },
     { new: true }
   );
@@ -77,4 +83,4 @@ const addtoWathclater = async (req, res) => {
   res.json(newList);
 };
 
-module.exports = { signIn, signup, watchlater, addtoWathclater };
+module.exports = { signIn, signup, watchlater1, addtoWathclater };

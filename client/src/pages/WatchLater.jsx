@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
+import MovieCard from "../components/MovieCard";
 
 const WatchLater = () => {
   const [watchLater, setWatchLater] = useState();
@@ -11,16 +12,24 @@ const WatchLater = () => {
 
   const getAllWatchLaterMovies = async () => {
     const token = localStorage.getItem("token");
-    const data = await axios("http://localhost:5111/api/user/watchlist", {
+    const data = await axios("http://localhost:3456/api/user/watchlist", {
       method: "GET",
       headers: { Authorization: token },
     });
-    console.log("🚀 ~ file: WatchLater.jsx:18 ~ getAllWatchLaterMovies ~ data:", data)
+    setWatchLater(data?.data[0].movies);
   };
 
   return (
     <div>
-      <div>wathc later</div>
+      <div>
+        <div className=" bg-gray-700 ">
+          <div className="p-20 flex gap-5 flex-wrap justify-center">
+            {watchLater?.map((item) => (
+              <MovieCard key={item._id} data={item} />
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

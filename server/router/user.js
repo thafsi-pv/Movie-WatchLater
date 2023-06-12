@@ -5,6 +5,7 @@ const {
   signup,
   watchlater,
   addtoWathclater,
+  watchlater1,
 } = require("../controllers/userController");
 const { checkAuth } = require("../middleware/checkAuth");
 
@@ -12,7 +13,7 @@ userRouter.post("/signIn", signIn);
 
 userRouter.post("/signUp", signup);
 
-userRouter.get("/watchlist", checkAuth, watchlater);
+userRouter.get("/watchlist1", checkAuth, watchlater1);
 
 userRouter.post("/addwathclater", checkAuth, addtoWathclater);
 

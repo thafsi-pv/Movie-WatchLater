@@ -5,20 +5,29 @@ import Button from "../components/Button";
 import Layout1 from "../components/Layout1";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 function SignIn() {
   const [login, setLogin] = useState({ email: "", password: "" });
   console.log("🚀 ~ file: SignIn.jsx:11 ~ SignIn ~ login:", login);
   const navigate = useNavigate();
   const handleLogin = async (e) => {
-    e.preventDefault();
-    const data = await axios("http://localhost:5111/api/user/signIn", {
-      method: "POST",
-      data: login,
-    });
-    if (data.status == 200) {
-      localStorage.setItem("token", data?.data?.accesstoken);
-      navigate(-1);
+    try {
+      e.preventDefault();
+      const data = await axios("http://localhost:5111/api/user/signIn", {
+        method: "POST",
+        data: login,
+      });
+      if (data.status == 200) {
+        localStorage.setItem("token", data?.data?.accesstoken);
+        navigate(-1);
+      } else {
+        toast("Hello World");
+      }
+    } catch (error) {
+      toast(error.response.data.message,{
+        icon: '❌',
+      });
     }
   };
 
@@ -77,6 +86,9 @@ function SignIn() {
             Sign up
           </Link>
         </p>
+      </div>
+      <div>
+        <Toaster />
       </div>
     </Layout1>
   );
