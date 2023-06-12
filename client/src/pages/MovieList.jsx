@@ -17,7 +17,6 @@ const MovieList = () => {
 
   return (
     <div className=" bg-gray-700 ">
-        <Header/>
       <div className="p-20 flex gap-5 flex-wrap justify-center">
         {movieList?.map((item) => (
           <MovieCard

@@ -2,13 +2,43 @@ import { GoPencil } from "react-icons/go";
 import { BiTrashAlt } from "react-icons/bi";
 import { MdOutlineWatchLater } from "react-icons/md";
 import MovieStars from "./MovieStars";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MOVIE_API_URL } from "../constants/const";
 import Tooltip from "./Tooltip";
 
 const MovieCard = ({ data, setmovielist, movielist }) => {
+  const navigate = useNavigate();
   const { _id, movieName, genre, rating, imageName } = data;
+
+  const handleAddtoWathcLater = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      console.log(
+        "🚀 ~ file: MovieCard.jsx:17 ~ handleAddtoWathcLater ~ token:",
+        token
+      );
+      const response = await axios(
+        "http://localhost:5111/api/user/addwathclater",
+        {
+          method: "POST",
+          data: { movieid: _id },
+          headers: { Authorization: token },
+        }
+      );
+      if (response.status == 200) {
+        navigate("/watchlater");
+      }
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: MovieCard.jsx:31 ~ handleAddtoWathcLater ~ error:",
+        error
+      );
+      if (error.response.status == 400) {
+        navigate("/signin");
+      }
+    }
+  };
 
   return (
     <div className="card card-side bg-base-100 shadow-xl sm:w-full lg:w-2/5">
@@ -36,7 +66,10 @@ const MovieCard = ({ data, setmovielist, movielist }) => {
         <div>
           <Tooltip content="Watchlater">
             <span>
-              <MdOutlineWatchLater className="h-5 w-5" />
+              <MdOutlineWatchLater
+                className="h-5 w-5"
+                onClick={handleAddtoWathcLater}
+              />
             </span>
           </Tooltip>
         </div>

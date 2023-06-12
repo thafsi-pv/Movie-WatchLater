@@ -5,16 +5,23 @@ import SignUp from "./pages/SignUp";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MovieList from "./pages/MovieList";
 import WatchLater from "./pages/WatchLater";
+import Home from "./pages/Home";
 
 function App() {
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <MovieList />,
-      children:[{
-        path:"/watchlater",
-        element:<WatchLater/>
-      }]
+      element: <Home />,
+      children: [
+        {
+          path: "/",
+          element: <MovieList />,
+        },
+        {
+          path: "/watchlater",
+          element: <WatchLater />,
+        },
+      ],
     },
     {
       path: "/signin",

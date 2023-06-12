@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../components/Input";
 import Label from "../components/Label";
 import Button from "../components/Button";
 import Layout1 from "../components/Layout1";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignIn() {
+  const [login, setLogin] = useState({ email: "", password: "" });
+  console.log("🚀 ~ file: SignIn.jsx:11 ~ SignIn ~ login:", login);
   const navigate = useNavigate();
-  const handleLogin = () => {
-    navigate("/");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const data = await axios("http://localhost:5111/api/user/signIn", {
+      method: "POST",
+      data: login,
+    });
+    if (data.status == 200) {
+      localStorage.setItem("token", data?.data?.accesstoken);
+      navigate(-1);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setLogin((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (
@@ -17,7 +35,14 @@ function SignIn() {
         <form className="space-y-6" action="#" method="POST">
           <div>
             <Label htmlFor="email" labelText="Email address" />
-            <Input id="email" name="email" type="email" autoComplete="email" />
+            <Input
+              id="email"
+              name="email"
+              state={login.email}
+              handleChange={handleInputChange}
+              type="email"
+              autoComplete="email"
+            />
           </div>
 
           <div>
@@ -31,11 +56,16 @@ function SignIn() {
                 </a>
               </div>
             </div>
-            <Input id="password" name="password" type="password" />
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              handleChange={handleInputChange}
+            />
           </div>
 
           <div>
-            <Button type="submit" btnLable="Sign in" onClick={handleLogin} />
+            <Button type="button" btnLable="Sign in" onClick={handleLogin} />
           </div>
         </form>
         <p className="mt-10 text-center text-sm text-gray-500">

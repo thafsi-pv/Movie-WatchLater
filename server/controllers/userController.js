@@ -46,11 +46,18 @@ const signup = async (req, res) => {
 
 const watchlater = async (req, res) => {
   try {
+    console.log(
+      "🚀 ~ file: userController.js:50 ~ watchlater ~ req.userId:",
+      req.userId
+    );
     const watchList = await userModel
-      .findById({ _id: req.userId })
-      .select("movies");
+      .findOne({ _id: req.userId })
+      .populate('moviez')
+
     res.json(watchList);
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json(error);
+  }
 };
 
 const addtoWathclater = async (req, res) => {
@@ -62,7 +69,7 @@ const addtoWathclater = async (req, res) => {
   const newList = await userModel.findByIdAndUpdate(
     userId,
     {
-      $addToSet: { movies: req.body.movieid },
+      $addToSet: { moviez: req.body.movieid },
     },
     { new: true }
   );
