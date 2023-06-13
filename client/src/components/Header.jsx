@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const navigate = useNavigate();
+  const [data, setData] = useState({});
+  console.log("🚀 ~ file: Header.jsx:7 ~ Header ~ data:", data);
+  useEffect(() => {
+    setData(JSON.parse(localStorage.getItem("movieDb")));
+  }, []);
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("movieDb");
     navigate("/signin");
   };
   return (
@@ -38,17 +43,25 @@ function Header() {
           Movie List
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to={"/watchlater"}>Watch later</Link>
-          </li>
-        </ul>
-      </div>
+
       <div className="navbar-end">
-        <a className="btn" onClick={handleLogout}>
-          Log Out
-        </a>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            {data && (
+              <li>
+                <Link to={"/watchlater"}>Watch later</Link>
+              </li>
+            )}
+          </ul>
+        </div>
+        <div>
+          {data && (
+            <a className="btn flex flex-col m-2" onClick={handleLogout}>
+              <span> Log Out</span>{" "}
+              <span className="text-xs lowercase">{data.email}</span>
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );

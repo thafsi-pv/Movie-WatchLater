@@ -14,20 +14,25 @@ function SignIn() {
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
-      const data = await axios("http://localhost:5111/api/user/signIn", {
+      const data = await axios("http://localhost:3456/api/user/signIn", {
         method: "POST",
         data: login,
       });
+      console.log("🚀 ~ file: SignIn.jsx:21 ~ handleLogin ~ data:", data);
       if (data.status == 200) {
-        localStorage.setItem("token", data?.data?.accesstoken);
-        navigate(-1);
+        localStorage.setItem(
+          "movieDb",
+          JSON.stringify({
+            token: data?.data?.accesstoken,
+            email: data?.data?.email,
+          })
+        );
+        navigate("/");
       } else {
         toast("Hello World");
       }
     } catch (error) {
-      toast(error.response.data.message,{
-        icon: '❌',
-      });
+      toast.error(error?.response?.data.message);
     }
   };
 
@@ -41,7 +46,7 @@ function SignIn() {
   return (
     <Layout1 headingLabel="Sign in to your account">
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" action="#" method="POST" autoComplete="off">
           <div>
             <Label htmlFor="email" labelText="Email address" />
             <Input
@@ -50,7 +55,6 @@ function SignIn() {
               state={login.email}
               handleChange={handleInputChange}
               type="email"
-              autoComplete="email"
             />
           </div>
 

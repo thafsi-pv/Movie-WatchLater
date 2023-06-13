@@ -24,6 +24,7 @@ const MovieList = () => {
             data={item}
             movielist={movieList}
             setmovielist={setMovieList}
+            watchlater={true}
           />
         ))}
       </div>
