@@ -5,15 +5,13 @@ import MovieCard from "../components/MovieCard";
 
 const WatchLater = () => {
   const [watchLater, setWatchLater] = useState([{}]);
-  console.log("🚀 ~ file: WatchLater.jsx:8 ~ WatchLater ~ watchLater:", watchLater)
-
   useEffect(() => {
     getAllWatchLaterMovies();
   }, []);
 
   const getAllWatchLaterMovies = async () => {
     const movieDb = JSON.parse(localStorage.getItem("movieDb"));
-    const data = await axios("http://localhost:3456/api/user/watchlist", {
+    const data = await axios(`${USER_API}watchlist`, {
       method: "GET",
       headers: { Authorization: movieDb.token },
     });

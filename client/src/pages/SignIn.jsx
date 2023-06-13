@@ -6,19 +6,18 @@ import Layout1 from "../components/Layout1";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { USER_API } from "../constants/const";
 
 function SignIn() {
   const [login, setLogin] = useState({ email: "", password: "" });
-  console.log("🚀 ~ file: SignIn.jsx:11 ~ SignIn ~ login:", login);
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
-      const data = await axios("http://localhost:3456/api/user/signIn", {
+      const data = await axios(`${USER_API}signIn`, {
         method: "POST",
         data: login,
       });
-      console.log("🚀 ~ file: SignIn.jsx:21 ~ handleLogin ~ data:", data);
       if (data.status == 200) {
         localStorage.setItem(
           "movieDb",
@@ -28,8 +27,6 @@ function SignIn() {
           })
         );
         navigate("/");
-      } else {
-        toast("Hello World");
       }
     } catch (error) {
       toast.error(error?.response?.data.message);
