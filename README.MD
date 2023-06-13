@@ -34,3 +34,6 @@ The login page allows users to sign up and log in with an email and password. Up
 - React hot toast
 - Tailwind
 - Cloudinary CDN
+- CORS (Cross-Origin Resource Sharing)
+- React Router
+- React-Icons
