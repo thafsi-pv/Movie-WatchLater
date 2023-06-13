@@ -10,6 +10,6 @@ exports.checkAuth = (req, res, next) => {
     req.userId = tokenValid._id;
     next();
   } catch (error) {
-    res.status(400).json({ message: "You are UnAutorized" });
+    res.status(400).json({ message: "You are Unauthorized" });
   }
 };
