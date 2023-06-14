@@ -7,6 +7,7 @@ import MovieList from "./pages/MovieList";
 import WatchLater from "./pages/WatchLater";
 import Home from "./pages/Home";
 import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -35,6 +36,10 @@ function App() {
     {
       path: "/forgotPassword",
       element: <ForgotPassword />,
+    },
+    {
+      path: "/resetPassword",
+      element: <ResetPassword />,
     },
   ]);
 

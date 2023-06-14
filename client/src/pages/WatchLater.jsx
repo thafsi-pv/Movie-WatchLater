@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
 import MovieCard from "../components/MovieCard";
+import { USER_API } from "../constants/const";
 
 const WatchLater = () => {
   const [watchLater, setWatchLater] = useState([{}]);
@@ -11,7 +12,7 @@ const WatchLater = () => {
 
   const getAllWatchLaterMovies = async () => {
     const movieDb = JSON.parse(localStorage.getItem("movieDb"));
-    const data = await axios(`${USER_API}watchlist`, {
+    const data = await axios(`${USER_API}/watchlist`, {
       method: "GET",
       headers: { Authorization: movieDb.token },
     });

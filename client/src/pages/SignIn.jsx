@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { USER_API } from "../constants/const";
+import Loader from "../components/Loader";
 
 function SignIn() {
   const [login, setLogin] = useState({ email: "", password: "" });
@@ -14,7 +15,7 @@ function SignIn() {
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
-      const data = await axios(`${USER_API}signIn`, {
+      const data = await axios(`${USER_API}/signIn`, {
         method: "POST",
         data: login,
       });

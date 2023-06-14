@@ -6,7 +6,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { MOVIE_API_URL } from "../constants/const";
+import { MOVIE_API_URL, USER_API } from "../constants/const";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function SignUp() {
   });
 
   const handleSignUp = async () => {
-    const response = await axios(`${MOVIE_API_URL}signUp`, {
+    const response = await axios(`${USER_API}/signUp`, {
       method: "POST",
       data: signUpData,
     });
