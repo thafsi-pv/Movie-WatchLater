@@ -59,11 +59,11 @@ function SignIn() {
             <div className="flex items-center justify-between">
               <Label htmlFor="password" labelText="password" />
               <div className="text-sm">
-                <a
-                  href="#"
+                <Link
+                  to="/forgotPassword"
                   className="font-semibold text-violet-600 hover:text-violet-500">
                   Forgot password?
-                </a>
+                </Link>
               </div>
             </div>
             <Input

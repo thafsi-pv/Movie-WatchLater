@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MovieList from "./pages/MovieList";
 import WatchLater from "./pages/WatchLater";
 import Home from "./pages/Home";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -30,6 +31,10 @@ function App() {
     {
       path: "/signup",
       element: <SignUp />,
+    },
+    {
+      path: "/forgotPassword",
+      element: <ForgotPassword />,
     },
   ]);
 
