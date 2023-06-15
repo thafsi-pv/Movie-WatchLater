@@ -43,6 +43,8 @@ const ForgotPassword = () => {
       }
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setShowLoader(false);
     }
   };
 
