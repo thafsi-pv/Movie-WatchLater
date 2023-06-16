@@ -39,9 +39,9 @@ const MovieCard = ({ data, setmovielist, movielist, watchlater }) => {
   };
 
   return (
-    <div className="card card-side bg-base-100 shadow-xl sm:w-full lg:w-2/5">
+    <div className="card card-side bg-base-100 shadow-xl h-64 sm:w-full lg:w-2/5">
       <figure className="lg:w-2/5">
-        <img className="h-full max-h-80xvcutgvv" src={imageName} alt="Movie" />
+        <img className="h-full max-h-80" src={imageName} alt="Movie" />
       </figure>
       <div className="card-body space-y-1">
         <h2 className="card-title">{movieName}</h2>

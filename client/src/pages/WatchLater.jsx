@@ -23,7 +23,7 @@ const WatchLater = () => {
     <div>
       <div>
         <div className=" bg-white">
-          <div className="p-20 flex gap-5 flex-wrap justify-center ">
+          <div className="p-20 flex gap-5 flex-wrap justify-center">
             {watchLater.length != 0 ? (
               watchLater?.map((item) => (
                 <MovieCard key={item._id} data={item} watchlater={false} />
@@ -45,6 +45,7 @@ const WatchLater = () => {
               </div>
             )}
           </div>
+         
         </div>
       </div>
     </div>
